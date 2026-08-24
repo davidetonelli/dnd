@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#17130f">
+  <meta name="description" content="Scheda rapida di Olga per Dungeons & Dragons">
+  <title>Olga — Scheda D&D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Scheda di gioco</p>
+      <h1 id="character-name">Olga</h1>
+      <p class="subtitle" id="character-meta">Artefice · Artigliere · Mezzorca</p>
+    </div>
+    <div class="header-actions">
+      <button class="icon-button" id="edit-button" type="button" aria-label="Modifica scheda">✎ <span>Modifica</span></button>
+      <button class="icon-button quiet" id="reset-button" type="button" aria-label="Ripristina dati iniziali">↺</button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sezioni della scheda">
+    <button class="tab active" data-tab="overview" type="button">In gioco</button>
+    <button class="tab" data-tab="spells" type="button">Incantesimi</button>
+    <button class="tab" data-tab="traits" type="button">Tratti & note</button>
+  </nav>
+
+  <main>
+    <section class="panel active" id="overview" aria-labelledby="overview-heading">
+      <h2 id="overview-heading" class="sr-only">Riepilogo in gioco</h2>
+      <div class="vitals-grid">
+        <article class="vital hp-card">
+          <div class="vital-label">Punti ferita</div>
+          <div class="counter-row">
+            <button class="counter-button" data-counter="hp" data-delta="-1" aria-label="Riduci punti ferita">−</button>
+            <strong><span id="hp-current">25</span><small>/ <span id="hp-max">25</span></small></strong>
+            <button class="counter-button" data-counter="hp" data-delta="1" aria-label="Aumenta punti ferita">+</button>
+          </div>
+          <div class="hp-track"><span id="hp-fill"></span></div>
+        </article>
+        <article class="vital"><div class="vital-label">Classe Armatura</div><strong id="armor-class">14</strong><small>CA</small></article>
+        <article class="vital"><div class="vital-label">Iniziativa</div><strong id="initiative">+2</strong><small>Destrezza</small></article>
+        <article class="vital"><div class="vital-label">Velocità</div><strong id="speed">9 m</strong><small>per turno</small></article>
+      </div>
+
+      <div class="section-heading"><div><p class="eyebrow">Colpo d’occhio</p><h2>Caratteristiche</h2></div><span class="hint">Tocca una voce per i dettagli</span></div>
+      <div class="abilities" id="abilities-list"></div>
+
+      <div class="two-column">
+        <article class="paper-card">
+          <div class="card-heading"><div><p class="eyebrow">Combattimento</p><h2>Numeri rapidi</h2></div></div>
+          <dl class="quick-list" id="quick-stats"></dl>
+        </article>
+        <article class="paper-card">
+          <div class="card-heading"><div><p class="eyebrow">Promemoria</p><h2>Competenze</h2></div></div>
+          <div class="tag-list" id="skills-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="spells" aria-labelledby="spells-heading">
+      <div class="spell-header">
+        <div><p class="eyebrow">Grimorio rapido</p><h2 id="spells-heading">Incantesimi</h2><p class="section-copy">Tocca un incantesimo per vedere cosa fa, tiro, durata e concentrazione.</p></div>
+        <div class="casting-box"><span>CD</span><strong id="spell-dc">13</strong><span>Attacco</span><strong id="spell-attack">+5</strong></div>
+      </div>
+      <div class="slot-board" id="slot-board"></div>
+      <div class="spell-filters" id="spell-filters" aria-label="Filtri incantesimi"></div>
+      <div class="spell-groups" id="spell-groups"></div>
+      <p class="rules-note">Descrizioni sintetiche per il tavolo, basate sulle regole 5e. In caso di differenze fa fede il manuale usato dal tuo DM.</p>
+    </section>
+
+    <section class="panel" id="traits" aria-labelledby="traits-heading">
+      <div class="section-heading"><div><p class="eyebrow">Identità e capacità</p><h2 id="traits-heading">Tratti & note</h2></div></div>
+      <div class="traits-layout">
+        <div class="trait-stack" id="traits-list"></div>
+        <article class="paper-card session-notes"><div class="card-heading"><div><p class="eyebrow">Sessione</p><h2>Appunti veloci</h2></div></div><textarea id="session-notes" placeholder="PNG incontrati, indizi, promesse, tesori…" aria-label="Appunti della sessione"></textarea><p class="autosave">Salvataggio automatico su questo dispositivo</p></article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="detail-dialog">
+    <button class="dialog-close" type="button" aria-label="Chiudi">×</button>
+    <div id="dialog-content"></div>
+  </dialog>
+
+  <dialog id="edit-dialog">
+    <button class="dialog-close" type="button" aria-label="Chiudi">×</button>
+    <div class="dialog-title"><p class="eyebrow">Personalizza</p><h2>Modifica scheda</h2></div>
+    <form id="edit-form">
+      <div class="form-grid">
+        <label>Nome<input name="name" required></label>
+        <label>Classe / sottoclasse<input name="className"></label>
+        <label>Razza<input name="race"></label>
+        <label>Livello<input name="level" inputmode="numeric" type="number" min="1" max="20"></label>
+        <label>PF attuali<input name="hpCurrent" inputmode="numeric" type="number" min="0"></label>
+        <label>PF massimi<input name="hpMax" inputmode="numeric" type="number" min="1"></label>
+        <label>Classe Armatura<input name="armorClass" inputmode="numeric" type="number"></label>
+        <label>Velocità<input name="speed"></label>
+        <label>CD incantesimi<input name="spellDc" inputmode="numeric" type="number"></label>
+        <label>Bonus attacco magico<input name="spellAttack"></label>
+      </div>
+      <p class="form-note">Questa prima versione permette di correggere i dati principali. Gli appunti sono sempre modificabili dalla relativa sezione.</p>
+      <button class="primary-button" type="submit">Salva modifiche</button>
+    </form>
+  </dialog>
+
+  <footer><span>OLGA // FIELD GRIMOIRE</span><span>I dati restano nel tuo browser</span></footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
