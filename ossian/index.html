@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#17130f">
+  <meta name="description" content="Scheda interattiva di Ossian Driftmer per Dungeons & Dragons">
+  <title>Ossian Driftmer — Scheda D&D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=20260829-2">
+  <link rel="stylesheet" href="ossian.css?v=1">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <div><p class="eyebrow">Scheda di gioco</p><h1 id="character-name">Ossian Driftmer</h1><p class="subtitle" id="character-meta"></p></div>
+    <div class="header-actions"><a class="icon-button home-link" href="../">Olga</a><button class="icon-button quiet" id="reset-button" type="button" aria-label="Ripristina">↺</button></div>
+  </header>
+  <nav class="tabs" aria-label="Sezioni della scheda">
+    <button class="tab active" data-tab="actions" type="button">Azioni</button>
+    <button class="tab" data-tab="overview" type="button">In gioco</button>
+    <button class="tab" data-tab="spells" type="button">Incantesimi</button>
+    <button class="tab" data-tab="traits" type="button">Tratti & note</button>
+  </nav>
+  <main>
+    <section class="panel active" id="actions">
+      <div class="actions-head">
+        <div><p class="eyebrow">Riepilogo operativo</p><h2>Tutte le possibilità</h2><p class="section-copy">Descrizioni complete. Tocca una voce per i dettagli tecnici.</p></div>
+        <div class="action-filters" aria-label="Filtra"><button class="action-filter active" data-filter="all">Tutto</button><button class="action-filter" data-filter="trait">Tratti</button><button class="action-filter" data-filter="0">Trucchetti</button><button class="action-filter" data-filter="1">Liv. 1</button><button class="action-filter" data-filter="2">Liv. 2</button></div>
+      </div>
+      <div class="action-board" id="action-board"></div>
+      <p class="rules-note">I livelli sono corretti applicando lo slittamento indicato: sezione 1 → trucchetti, sezione 2 → livello 1, sezione 3 → livello 2.</p>
+    </section>
+    <section class="panel" id="overview">
+      <div class="vitals-grid ossian-vitals">
+        <article class="vital hp-card"><span class="vital-label">Punti ferita</span><div class="counter-row"><button class="counter-button" data-counter="hp" data-delta="-1">−</button><strong><span id="hp-current"></span><small>/<span id="hp-max"></span></small></strong><button class="counter-button" data-counter="hp" data-delta="1">+</button></div></article>
+        <article class="vital madness-card"><span class="vital-label">Punti follia</span><div class="counter-row"><button class="counter-button" data-counter="madness" data-delta="-1">−</button><strong><span id="madness-current"></span><small>/<span id="madness-max"></span></small></strong><button class="counter-button" data-counter="madness" data-delta="1">+</button></div></article>
+        <article class="vital"><span class="vital-label">Classe armatura</span><strong id="armor-class"></strong></article>
+        <article class="vital"><span class="vital-label">Iniziativa</span><strong id="initiative"></strong></article>
+        <article class="vital"><span class="vital-label">Velocità</span><strong id="speed"></strong></article>
+      </div>
+      <div class="section-heading"><div><p class="eyebrow">Caratteristiche</p><h2>Punteggi e modificatori</h2></div></div>
+      <div class="abilities" id="abilities-list"></div>
+      <div class="two-column"><article class="paper-card"><p class="eyebrow">Tiri salvezza</p><h3>Competenze</h3><div class="tag-list" id="saves-list"></div></article><article class="paper-card"><p class="eyebrow">Abilità</p><h3>Competenze</h3><div class="tag-list" id="skills-list"></div></article></div>
+      <div class="section-heading"><div><p class="eyebrow">Risorse</p><h2>Slot incantesimo</h2></div></div><div class="slot-board" id="slot-board"></div>
+    </section>
+    <section class="panel" id="spells">
+      <div class="spell-header"><div><p class="eyebrow">Warlock</p><h2>Incantesimi</h2><p class="section-copy">Caratteristica: Carisma · CD 15 · attacco +7</p></div><div class="casting-box"><span>CD</span><strong>15</strong><span>Attacco</span><strong>+7</strong></div></div>
+      <div class="slot-board" id="spell-slot-board"></div><div class="spell-groups" id="spell-groups"></div>
+    </section>
+    <section class="panel" id="traits">
+      <div class="section-heading"><div><p class="eyebrow">Identità e poteri</p><h2>Tratti & note</h2></div></div>
+      <div class="traits-layout"><div class="trait-stack" id="traits-list"></div><article class="paper-card session-notes"><p class="eyebrow">Appunti di sessione</p><h3>Note rapide</h3><textarea id="session-notes" placeholder="Scrivi qui..."></textarea><p class="autosave">Salvataggio automatico sul dispositivo</p></article></div>
+      <div class="two-column"><article class="paper-card"><p class="eyebrow">Equipaggiamento</p><div class="tag-list" id="equipment-list"></div></article><article class="paper-card"><p class="eyebrow">Lingue</p><div class="tag-list" id="languages-list"></div></article></div>
+    </section>
+  </main>
+  <dialog id="detail-dialog"><button class="dialog-close" type="button" aria-label="Chiudi">×</button><div id="dialog-content"></div></dialog>
+  <footer><span>OSSIAN // FIELD GRIMOIRE</span><span><a href="../">Scheda di Olga</a></span></footer>
+  <script src="data.js?v=1"></script><script src="app.js?v=1"></script>
+</body>
+</html>
