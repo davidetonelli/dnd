@@ -26,13 +26,26 @@
   </header>
 
   <nav class="tabs" aria-label="Sezioni della scheda">
-    <button class="tab active" data-tab="overview" type="button">In gioco</button>
+    <button class="tab active" data-tab="actions" type="button">Azioni</button>
+    <button class="tab" data-tab="overview" type="button">In gioco</button>
     <button class="tab" data-tab="spells" type="button">Incantesimi</button>
     <button class="tab" data-tab="traits" type="button">Tratti & note</button>
   </nav>
 
   <main>
-    <section class="panel active" id="overview" aria-labelledby="overview-heading">
+    <section class="panel active" id="actions" aria-labelledby="actions-heading">
+      <div class="actions-head">
+        <div><p class="eyebrow">Turno e possibilità</p><h2 id="actions-heading">Tutte le azioni</h2><p class="section-copy">Incantesimi, capacità e reazioni in un’unica schermata. Tocca una voce per aprire i dettagli.</p></div>
+        <div class="action-filters" id="action-filters" aria-label="Filtra le azioni">
+          <button class="action-filter active" data-action-filter="all" type="button">Tutto</button>
+          <button class="action-filter" data-action-filter="utility" type="button">Utilità</button>
+          <button class="action-filter" data-action-filter="combat" type="button">Combattimento</button>
+        </div>
+      </div>
+      <div class="action-board" id="action-board"></div>
+    </section>
+
+    <section class="panel" id="overview" aria-labelledby="overview-heading">
       <h2 id="overview-heading" class="sr-only">Riepilogo in gioco</h2>
       <div class="vitals-grid">
         <article class="vital hp-card">
